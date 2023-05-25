@@ -1,3 +1,11 @@
-GameOfLife.pro.user
-
+# Visual studio programme
 .vs/
+GameOfLife.pro.user
+GameOfLife.vcxproj
+GameOfLife.vcxproj.filters
+GameOfLife.vcxproj.user
+.qmake.stash
+debug/
+release/
+
+*.json
