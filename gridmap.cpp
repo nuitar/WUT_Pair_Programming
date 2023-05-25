@@ -7,7 +7,6 @@
 gridMap::gridMap(QWidget *parent)
     : QWidget(parent)
 {
-
     this->minGap = 4;
     this->maxGap = 14;
     this->gap = 20;
@@ -16,8 +15,16 @@ gridMap::gridMap(QWidget *parent)
     this->darkPen = QPen(QColor(200, 200, 200));
     this->darkPen.setWidth(1);
     this->setBackgroundColor();
-    this->mat = QVector<QVector<bool>>(26, QVector<bool>(40, 0));
-    qDebug() << startX << "," << startY;
+    this->mat = QVector<QVector<bool>>(26, QVector<bool>(50, 0));
+    connect(this, &gridMap::updateNext, [=] {
+        std::vector<MyPoint> updatePoints =  logic.NextState();
+        for (MyPoint p:updatePoints) {
+            if(p.x<26&&p.y<50)
+            mat[p.x][p.y] = !mat[p.x][p.y];
+        }
+        this->update();
+        });
+    this->setFixedSize(1000, 520);
 }
 
 gridMap::~gridMap()
@@ -105,6 +112,7 @@ void gridMap::paintEvent(QPaintEvent *event)
 
     this->drawRowLines(&painter);
     this->drawColLines(&painter);
+
 }
 
 void gridMap::wheelEvent(QWheelEvent *event)
@@ -144,6 +152,10 @@ void gridMap::mousePressEvent(QMouseEvent *event)
     QPainter painter(this);
     QPoint p = event->pos();
     int x = p.x() / this->gap, y = p.y() / this->gap ;
+    //y x 是窗体中的坐标与矩阵相反
     mat[y][x] = !mat[y][x];
+
+    MyPoint pressPoint = { y,x };
+    logic.Click(pressPoint);
     this->update();
 }

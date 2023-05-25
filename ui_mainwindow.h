@@ -28,7 +28,7 @@ public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     gridMap *widget;
-    QWidget *widget_2;
+    QWidget *widgetBtns;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButton;
@@ -54,37 +54,37 @@ public:
 
         verticalLayout->addWidget(widget);
 
-        widget_2 = new QWidget(centralwidget);
-        widget_2->setObjectName("widget_2");
-        widget_2->setMaximumSize(QSize(16777215, 100));
-        horizontalLayout = new QHBoxLayout(widget_2);
+        widgetBtns = new QWidget(centralwidget);
+        widgetBtns->setObjectName("widgetBtns");
+        widgetBtns->setMaximumSize(QSize(16777215, 100));
+        horizontalLayout = new QHBoxLayout(widgetBtns);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        pushButton = new QPushButton(widget_2);
+        pushButton = new QPushButton(widgetBtns);
         pushButton->setObjectName("pushButton");
 
         horizontalLayout->addWidget(pushButton);
 
-        btnRandom = new QPushButton(widget_2);
+        btnRandom = new QPushButton(widgetBtns);
         btnRandom->setObjectName("btnRandom");
 
         horizontalLayout->addWidget(btnRandom);
 
-        btnStart = new QPushButton(widget_2);
+        btnStart = new QPushButton(widgetBtns);
         btnStart->setObjectName("btnStart");
-        btnStart->setMinimumSize(QSize(150, 70));
+        btnStart->setMinimumSize(QSize(150, 50));
 
         horizontalLayout->addWidget(btnStart);
 
-        btnNext = new QPushButton(widget_2);
+        btnNext = new QPushButton(widgetBtns);
         btnNext->setObjectName("btnNext");
 
         horizontalLayout->addWidget(btnNext);
 
-        btnReset = new QPushButton(widget_2);
+        btnReset = new QPushButton(widgetBtns);
         btnReset->setObjectName("btnReset");
 
         horizontalLayout->addWidget(btnReset);
@@ -94,12 +94,12 @@ public:
         horizontalLayout->addItem(horizontalSpacer_2);
 
 
-        verticalLayout->addWidget(widget_2);
+        verticalLayout->addWidget(widgetBtns);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 828, 26));
+        menubar->setGeometry(QRect(0, 0, 828, 22));
         MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);

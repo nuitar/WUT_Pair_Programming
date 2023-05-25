@@ -7,5 +7,7 @@ GameOfLife.vcxproj.user
 .qmake.stash
 debug/
 release/
+GameOfLife.aps
+GameOfLife.rc
 
 *.json

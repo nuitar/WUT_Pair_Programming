@@ -2,12 +2,14 @@
 #define GRIDMAP_H
 
 #include <QWidget>
-
-
 #include <QWidget>
 #include <QPen>
 #include <QPainter>
 #include <QPaintEvent>
+#include <vector>
+#include <qtimer.h>
+#include "Logic.h"
+#include "Global.h"
 
 class gridMap : public QWidget
 {
@@ -23,14 +25,12 @@ protected:
     void resizeEvent(QResizeEvent *event);
     void mousePressEvent(QMouseEvent *event);
 
-
-
 private:
     void setBackgroundColor();              // 设置窗口背景颜色
     void drawRowLines(QPainter *painter);   // 绘制横线
     void drawColLines(QPainter *painter);   // 绘制竖线
     void drawCell(QPainter *painter);
-
+    
 
 private:
     int minGap;                              // 最小线间隔
@@ -40,6 +40,10 @@ private:
     float startY;                            // 横线初始y坐标（从窗口中间开始）
     QPen darkPen;                            // 粗一点的画笔
     QVector<QVector<bool>> mat;
+    Logic logic;
+
+signals:
+    void updateNext();
 };
 
 
