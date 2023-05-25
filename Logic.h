@@ -10,8 +10,9 @@ private:
 	bool map[ROWS][COLS];
 public:
 	Logic();
-	int getRoundAlive(int i, int j);   //»ñÈ¡µÚiĞĞjÁĞµÄµ±Ç°µÄ¸ñ×ÓµÄÖÜÎ§µÄ»îÏ¸°ûµÄÊıÄ¿
-	vector<MyPoint> NextState();   //ÏÂÒ»¸ö×´Ì¬
-	void Click(MyPoint point);   //µã»÷Êó±êÔò½«µ±Ç°¸ñ×ÓÈ¡·´£¬¸üĞÂµØÍ¼¡£
+	int getRoundAlive(int i, int j);   //è·å–ç¬¬iè¡Œjåˆ—çš„å½“å‰çš„æ ¼å­çš„å‘¨å›´çš„æ´»ç»†èƒçš„æ•°ç›®
+	vector<MyPoint> NextState();   //ä¸‹ä¸€ä¸ªçŠ¶æ€
+	void Click(MyPoint point);   //ç‚¹å‡»é¼ æ ‡åˆ™å°†å½“å‰æ ¼å­å–åï¼Œæ›´æ–°åœ°å›¾ã€‚
+	vector<MyPoint> Random();  //éšæœºç”Ÿæˆä¸€ç»„æ´»ç»†èƒçš„åæ ‡
+	void Reset();  //æ¸…ç©ºæ•°ç»„
 };
-
