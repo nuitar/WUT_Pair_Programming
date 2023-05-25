@@ -32,17 +32,17 @@ void Logic::Click(MyPoint point) {
 vector<MyPoint> Logic::NextState() {
 	vector<MyPoint> MyPoints;
 	int RoundAlive[ROWS][COLS];
-	//¼ÆËãµ±Ç°×´Ì¬µÄÃ¿Ò»¸öÏ¸°ûÖÜÎ§µÄ»îµÄÏ¸°û
+	//è®¡ç®—å½“å‰çŠ¶æ€çš„æ¯ä¸€ä¸ªç»†èƒå‘¨å›´çš„æ´»çš„ç»†èƒ
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++) {
 			RoundAlive[i][j] = getRoundAlive(i, j);
 		}
 	}
-	//±éÀú¶şÎ¬Êı×éÀ´¸üĞÂÃ¿Ò»¸öÏ¸°ûµÄ×´Ì¬²¢ÇÒÅĞ¶Ïµ±Ç°Ï¸°ûÊÇ·ñ¸ü¸Ä£¬ÊÇµÄ»°Ôò¼ÓÈëMyPoints¡£
+	//éå†äºŒç»´æ•°ç»„æ¥æ›´æ–°æ¯ä¸€ä¸ªç»†èƒçš„çŠ¶æ€å¹¶ä¸”åˆ¤æ–­å½“å‰ç»†èƒæ˜¯å¦æ›´æ”¹ï¼Œæ˜¯çš„è¯åˆ™åŠ å…¥MyPointsã€‚
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++) {
 			int num = RoundAlive[i][j];
-			if (num == 3) {  //ÖÜÎ§»îÏ¸°ûµÈÓÚ3Ôò´æ»î
+			if (num == 3) {  //å‘¨å›´æ´»ç»†èƒç­‰äº3åˆ™å­˜æ´»
 				if (map[i][j] == false) {
 					MyPoint point = { i,j };
 					MyPoints.push_back(point);
@@ -50,15 +50,44 @@ vector<MyPoint> Logic::NextState() {
 				map[i][j] = true;
 			}
 			else if (num == 2) {
-				//ÖÜÎ§»îÏ¸°ûµÈÓÚ2Ôò²»±ä
+				//å‘¨å›´æ´»ç»†èƒç­‰äº2åˆ™ä¸å˜
 			}
 			else {
-				//Ï¸°ûËÀÍö
+				//ç»†èƒæ­»äº¡
 				if (map[i][j] == true) {
 					MyPoint point = { i,j };
 					MyPoints.push_back(point);
 				}
 				map[i][j] = false;
+			}
+		}
+	}
+	return MyPoints;
+}
+
+void Logic::Reset() {
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			map[i][j] = 0;
+		}
+	}
+}
+
+vector<MyPoint> Logic::Random() {
+	vector<MyPoint> MyPoints;
+	srand((int)time(0));
+	for (int i = 0; i < ROWS * COLS/6; i++) {
+		//éšæœºç”Ÿæˆè¡Œæ•°å’Œåˆ—æ•°
+		int row = rand() % (ROWS - 1);
+		int col = rand() % (COLS - 1);
+		//å°†ç”Ÿæˆçš„åœ°æ–¹æ”¹ä¸º1
+		map[row][col] = 1;
+	}
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			if (map[i][j] == 1) {  //å¦‚æœæ˜¯1ï¼Œåˆ™æ·»åŠ 
+				MyPoint point = { i,j };
+				MyPoints.push_back(point);
 			}
 		}
 	}
