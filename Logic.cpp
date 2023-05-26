@@ -29,8 +29,7 @@ void Logic::Click(MyPoint point) {
 	map[point.x][point.y] = !map[point.x][point.y];
 }
 
-vector<MyPoint> Logic::NextState() {
-	vector<MyPoint> MyPoints;
+void Logic::NextState() {
 	int RoundAlive[ROWS][COLS];
 	//计算当前状态的每一个细胞周围的活的细胞
 	for (int i = 0; i < ROWS; i++) {
@@ -45,7 +44,6 @@ vector<MyPoint> Logic::NextState() {
 			if (num == 3) {  //周围活细胞等于3则存活
 				if (map[i][j] == false) {
 					MyPoint point = { i,j };
-					MyPoints.push_back(point);
 				}
 				map[i][j] = true;
 			}
@@ -56,13 +54,11 @@ vector<MyPoint> Logic::NextState() {
 				//细胞死亡
 				if (map[i][j] == true) {
 					MyPoint point = { i,j };
-					MyPoints.push_back(point);
 				}
 				map[i][j] = false;
 			}
 		}
 	}
-	return MyPoints;
 }
 
 void Logic::Reset() {
@@ -73,8 +69,7 @@ void Logic::Reset() {
 	}
 }
 
-vector<MyPoint> Logic::Random() {
-	vector<MyPoint> MyPoints;
+void Logic::Random() {
 	srand((int)time(0));
 	for (int i = 0; i < ROWS * COLS/6; i++) {
 		//随机生成行数和列数
@@ -83,9 +78,13 @@ vector<MyPoint> Logic::Random() {
 		//将生成的地方改为1
 		map[row][col] = 1;
 	}
+}
+
+vector<MyPoint> Logic::GetTruePoint() {
+	vector<MyPoint> MyPoints;
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++) {
-			if (map[i][j] == 1) {  //如果是1，则添加
+			if (map[i][j] == 1) {     //如果是1，则添加
 				MyPoint point = { i,j };
 				MyPoints.push_back(point);
 			}
