@@ -39,11 +39,12 @@ private:
     float startX;                            // 竖线初始x坐标（从窗口中间开始）
     float startY;                            // 横线初始y坐标（从窗口中间开始）
     QPen darkPen;                            // 粗一点的画笔
-    QVector<QVector<bool>> mat;
     Logic logic;
 
 signals:
     void updateNext();
+    void random();
+    void reset();
 };
 
 

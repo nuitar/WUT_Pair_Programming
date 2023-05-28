@@ -50,6 +50,7 @@ public:
         verticalLayout->setObjectName("verticalLayout");
         widget = new gridMap(centralwidget);
         widget->setObjectName("widget");
+        widget->setMinimumSize(QSize(0, 1));
         widget->setMaximumSize(QSize(800, 520));
 
         verticalLayout->addWidget(widget);

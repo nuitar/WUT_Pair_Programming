@@ -18,9 +18,9 @@ MainWindow::MainWindow(QWidget* parent)
             time.start();
             this->ui->btnStart->setText("End");
         }
-      
-});
-
+    });
+    connect(this->ui->btnReset, &QPushButton::clicked, this->ui->widget, &gridMap::reset);
+    connect(this->ui->btnRandom, &QPushButton::clicked, this->ui->widget, &gridMap::random);
     connect(&this->time, &QTimer::timeout, this->ui->widget, &gridMap::updateNext);
     this->setWindowTitle("Game of life");
     this->setWindowIcon(QIcon("res/font.png"));

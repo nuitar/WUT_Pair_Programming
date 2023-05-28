@@ -15,13 +15,16 @@ gridMap::gridMap(QWidget *parent)
     this->darkPen = QPen(QColor(200, 200, 200));
     this->darkPen.setWidth(1);
     this->setBackgroundColor();
-    this->mat = QVector<QVector<bool>>(26, QVector<bool>(50, 0));
     connect(this, &gridMap::updateNext, [=] {
-        std::vector<MyPoint> updatePoints =  logic.NextState();
-        for (MyPoint p:updatePoints) {
-            if(p.x<26&&p.y<50)
-            mat[p.x][p.y] = !mat[p.x][p.y];
-        }
+        logic.NextState();
+        this->update();
+        });
+    connect(this, &gridMap::random, [=] {
+        logic.Random();
+        this->update();
+        });
+    connect(this, &gridMap::reset, [=] {
+        logic.Reset();
         this->update();
         });
     this->setFixedSize(1000, 520);
@@ -89,18 +92,12 @@ void gridMap::drawCell(QPainter *painter)
 {
 
     int l = this->gap;
-    QColor cTrue(231, 250, 65), cFalse(140, 140, 140);
-    for(int i = 0; i < mat.size(); i++)
-    {
-        for(int j = 0; j < mat[0].size(); j++)
-        {
-            QColor c = mat[i][j] ? cTrue : cFalse;
-            painter->setPen(QPen(c));
-            painter->setBrush(QBrush(c));
-            painter->drawRect(j * this->gap, i * this->gap,  l, l);
-        }
-
-    }
+    QColor c(231, 250, 65);
+    painter->setPen(QPen(c));
+    painter->setBrush(QBrush(c));
+    vector<MyPoint> truePoints = logic.GetTruePoint();
+    for(MyPoint p:truePoints)
+         painter->drawRect(p.y * this->gap, p.x * this->gap, l, l);
 
 }
 
@@ -153,7 +150,6 @@ void gridMap::mousePressEvent(QMouseEvent *event)
     QPoint p = event->pos();
     int x = p.x() / this->gap, y = p.y() / this->gap ;
     //y x 是窗体中的坐标与矩阵相反
-    mat[y][x] = !mat[y][x];
 
     MyPoint pressPoint = { y,x };
     logic.Click(pressPoint);
